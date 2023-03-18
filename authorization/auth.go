@@ -1,4 +1,4 @@
-package internal
+package authorization
 
 import (
 	"encoding/json"
