@@ -12,6 +12,7 @@
 
 ## Инструкция по запуску
 Запускается следующим образом: `go run main.go -username=ВашЛогин -password=ВашПароль -testmode=true/false`
+
 Пример: `go run main.go -username=myLogin -password=qwerty12345 -testmode=false`
 
 В зависимости от флага тестового режима запрос будет делаться на тестовом/боевом URL. По умолчанию `testmode=true`
