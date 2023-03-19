@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"errors"
 	"io"
-	"log"
 	"net/http"
 	"time"
 
@@ -41,7 +40,7 @@ func FormReqBody(addrFrom, addrTo string, size data.Size) ([]byte, error) {
 func GetBody(url, token string, client *http.Client, body io.Reader) ([]byte, error) {
 	request, err := http.NewRequest("POST", url, body)
 	if err != nil {
-		log.Fatal(FailedNewRequest)
+		return nil, FailedNewRequest
 	}
 
 	if token != "" {
@@ -51,7 +50,11 @@ func GetBody(url, token string, client *http.Client, body io.Reader) ([]byte, er
 
 	response, err := client.Do(request)
 	if err != nil {
-		log.Fatal(FailedDoRequest)
+		return nil, FailedDoRequest
+	}
+
+	if response.StatusCode < 200 || response.StatusCode > 299 {
+		return nil, FailedDoRequest
 	}
 
 	defer response.Body.Close()
@@ -93,6 +96,7 @@ func Calculate(addrFrom, addrTo string, size data.Size) ([]data.PriceSending, er
 	if err != nil {
 		return nil, err
 	}
+
 	err = json.Unmarshal(body, &priceSendings)
 	if err != nil {
 		return nil, errors.New("Не удалось получить информацию")

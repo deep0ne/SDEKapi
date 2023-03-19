@@ -2,7 +2,6 @@ package data
 
 const (
 	ApiURL      = "https://api.edu.cdek.ru/v2/oauth/token"
-	CalcURL     = "https://api.edu.cdek.ru/v2/calculator/tarifflist"
 	AddressFrom = "Россия, г. Москва, Cлавянский бульвар д.1"
 	AddressTo   = "Россия, Воронежская обл., г. Воронеж, ул. Ленина д.43"
 )
